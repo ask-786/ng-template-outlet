@@ -15,7 +15,7 @@ import {
   styleUrl: './table.component.scss',
   styles: [
     `
-      host: {
+      host {
         max-height: 100%;
       }
     `,
