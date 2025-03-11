@@ -1,0 +1,31 @@
+<div class="overflow-x-auto max-h-full relative">
+  <table class="w-full text-sm text-left">
+    <thead class="bg-slate-700 text-white sticky top-0 z-10">
+      <ng-container *ngTemplateOutlet="header() || defaultHeader" />
+    </thead>
+
+    <tbody class="divide-y bg-slate-100">
+      @for (row of data(); track row) {
+        <ng-container
+          *ngTemplateOutlet="body() || defaultBody; context: { $implicit: row }"
+        />
+      }
+    </tbody>
+  </table>
+</div>
+
+<ng-template #defaultHeader>
+  <tr>
+    @for (head of headers(); track head) {
+      <th class="py-3 px-4 font-medium">{{ head }}</th>
+    }
+  </tr>
+</ng-template>
+
+<ng-template #defaultBody let-row>
+  <tr class="hover:bg-slate-200">
+    @for (head of headers(); track head) {
+      <td class="py-3 px-4">{{ row[head] }}</td>
+    }
+  </tr>
+</ng-template>
