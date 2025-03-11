@@ -6,16 +6,48 @@
         <th class="py-3 px-4 font-medium">Email</th>
         <th class="py-3 px-4 font-medium">Phone</th>
         <th class="py-3 px-4 font-medium">Company</th>
+        <th class="py-3 px-4 font-medium">Country</th>
         <th class="py-3 px-4 font-medium">Location</th>
+      </tr>
+      <tr class="text-gray-600" [formGroup]="form">
+        <th class="p-1 font-medium">
+          <input
+            class="bg-white w-full rounded p-0.5"
+            formControlName="name"
+            type="text"
+          />
+        </th>
+        <th class="p-1 font-medium"></th>
+        <th class="p-1 font-medium"></th>
+        <th class="p-1 font-medium">
+          <input
+            class="bg-white w-full rounded p-0.5"
+            formControlName="company"
+            type="text"
+          />
+        </th>
+        <th class="p-1 font-medium">
+          <input
+            class="bg-white w-full rounded p-0.5"
+            formControlName="country"
+            type="text"
+          />
+        </th>
+        <th class="p-1 font-medium"></th>
       </tr>
     </ng-template>
     <ng-template #body let-user>
       <tr>
-        <td class="py-3 px-4">{{ user.name }}</td>
-        <td class="py-3 px-4">{{ user.company.email }}</td>
-        <td class="py-3 px-4">{{ user.company.phone }}</td>
-        <td class="py-3 px-4">{{ user.company.title }}</td>
-        <td class="py-3 px-4">{{ user.company.location.address }}</td>
+        <td class="py-3 px-4 text-nowrap">{{ user.name }}</td>
+        <td class="py-3 px-4 text-nowrap">{{ user.company.email }}</td>
+        <td class="py-3 px-4 text-nowrap">{{ user.company.phone }}</td>
+        <td class="py-3 px-4 text-nowrap">{{ user.company.title }}</td>
+        <td class="py-3 px-4 text-nowrap">
+          {{ user.company.location.country }}
+        </td>
+        <td class="py-3 px-4 text-nowrap">
+          {{ user.company.location.address }}
+        </td>
       </tr>
     </ng-template>
   </app-table>

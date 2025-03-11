@@ -31,9 +31,7 @@ export class TableComponent<T extends { [key: string]: any }> {
   headers = signal<string[]>([]);
 
   eff = effect(() => {
-    const data = this.data();
-    console.log(data);
-    this.setHeaders(data);
+    this.setHeaders(this.data());
   });
 
   setHeaders(data: T[]) {
