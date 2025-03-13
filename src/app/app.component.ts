@@ -2,6 +2,7 @@ import { Component, inject, OnDestroy, resource, signal } from '@angular/core';
 import {
   debounceTime,
   distinctUntilChanged,
+  finalize,
   firstValueFrom,
   map,
   Subject,
@@ -22,8 +23,6 @@ export class AppComponent implements OnDestroy {
   private dataService = inject(DataService);
 
   private destroy$ = new Subject();
-
-  loading = signal(false);
 
   form = new FormGroup({
     name: new FormControl(''),
@@ -46,12 +45,19 @@ export class AppComponent implements OnDestroy {
       ...this.valueSignal(),
     }),
     defaultValue: [],
-    loader: ({ request }) =>
-      firstValueFrom(
+    loader: ({ request }) => {
+      this.form.disable();
+      return firstValueFrom(
         this.dataService
           .getUsers(request.name!, request.country!, request.company!)
-          .pipe(map((val) => val.data.users)),
-      ),
+          .pipe(
+            map((val) => val.data.users),
+            finalize(() => {
+              this.form.enable();
+            }),
+          ),
+      );
+    },
   });
 
   ngOnDestroy(): void {
