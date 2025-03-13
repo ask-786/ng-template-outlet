@@ -1,5 +1,8 @@
 <div>
-  <app-table [data]="users()">
+  @if (users.isLoading()) {
+    <span>Loading...</span>
+  }
+  <app-table [data]="users.value()">
     <ng-template #header>
       <tr>
         <th class="py-3 px-4 font-medium">Name</th>
@@ -12,6 +15,7 @@
       <tr class="text-gray-600" [formGroup]="form">
         <th class="p-1 font-medium">
           <input
+            [disabled]="users.isLoading()"
             class="bg-white w-full rounded p-0.5"
             formControlName="name"
             type="text"
@@ -21,6 +25,7 @@
         <th class="p-1 font-medium"></th>
         <th class="p-1 font-medium">
           <input
+            [disabled]="users.isLoading()"
             class="bg-white w-full rounded p-0.5"
             formControlName="company"
             type="text"
@@ -28,6 +33,7 @@
         </th>
         <th class="p-1 font-medium">
           <input
+            [disabled]="users.isLoading()"
             class="bg-white w-full rounded p-0.5"
             formControlName="country"
             type="text"

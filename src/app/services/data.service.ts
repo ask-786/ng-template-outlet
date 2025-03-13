@@ -10,8 +10,8 @@ export class DataService {
   private apollo = inject(Apollo);
 
   getUsers(name = '', country = '', company = '') {
-    return this.apollo.watchQuery<{ users: User[] }>({
+    return this.apollo.query<{ users: User[] }>({
       query: createGetUsers(name, country, company),
-    }).valueChanges;
+    });
   }
 }
